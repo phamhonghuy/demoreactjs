@@ -5,18 +5,26 @@ import { useCallback, useState } from 'react';
 import { v4 } from 'uuid';
 
 function App() {
-  const [todoList, setTodoList] = useState([]);
-  const [textInput, setTextInput] = useState('');
-
-  const onTextInputChange = useCallback((e) => {
-    setTextInput(e.target.value);
+  const [pet, setPet] = useState([]);
+  const [nameInput, setNameInput] = useState('');
+  const [speciesInput, setSpeciesInput] = useState('');
+  const [ageInput, setAgeInput] = useState('');
+  
+  const onNameInputChange = useCallback((e) => {
+    setNameInput(e.target.value);
+  }, []);
+  const onAgeInputChange = useCallback((e) => {
+    setAgeInput(e.target.value);
+  }, []);
+  const onSpeciesInputChange = useCallback((e) => {
+    setSpeciesInput(e.target.value);
   }, []);
 
   const onAddBtnClick = useCallback(
     (e) => {
-      setTodoList([
-        { id: v4(), name: textInput, isCompleted: false },
-        ...todoList,
+      setPet([
+        { id: v4(), name: nameInput, species: speciesInput, age : ageInput, isDelete: false },
+        ...pet,
       ]);
       setTextInput('');
     },
@@ -33,24 +41,36 @@ function App() {
 
   return (
     <>
-      <h3>Danh sách cần làm</h3>
+      <h3>Pets list!</h3>
       <Textfield
-        name='add-todo'
-        placeholder='Thêm việc cần làm...'
-        elemAfterInput={
+        name='add-name'
+        placeholder='Name...'
+        css={{ padding: '2px 4px 2px' }}
+        value={nameInput}
+        onChange={onNameInputChange}
+      ></Textfield>
+      <Textfield
+        name='add-species'
+        placeholder='Species...'
+        css={{ padding: '2px 4px 2px' }}
+        value={speciesInput}
+        onChange={onSpeciesInputChange}
+      ></Textfield>
+      <Textfield
+        name='add-age'
+        placeholder='Age...'
+        css={{ padding: '2px 4px 2px' }}
+        value={ageInput}
+        onChange={onAgeInputChange}
+      ></Textfield>
           <Button
             isDisabled={!textInput}
             appearance='primary'
             onClick={onAddBtnClick}
           >
-            Thêm
+            Add
           </Button>
-        }
-        css={{ padding: '2px 4px 2px' }}
-        value={textInput}
-        onChange={onTextInputChange}
-      ></Textfield>
-      <TodoList todoList={todoList} onCheckBtnClick={onCheckBtnClick} />
+      <TodoList pet={pet} onCheckBtnClick={onCheckBtnClick} />
     </>
   );
 }

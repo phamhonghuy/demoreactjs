@@ -1,10 +1,10 @@
 import React from 'react';
 import Todo from './Todo';
-export default function TodoList({ todoList, onCheckBtnClick }) {
+export default function TodoList({ pet, onCheckBtnClick }) {
   return (
     <>
-      {todoList.map((todo) => (
-        <Todo key={todo.id} todo={todo} onCheckBtnClick={onCheckBtnClick} />
+      {todoList.map((pet) => (
+        <Todo key={todo.id} pet={pet} onCheckBtnClick={onCheckBtnClick} />
       ))}
     </>
   );

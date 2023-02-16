@@ -31,18 +31,18 @@ const ButtonStyled = styled(Button)`
   }
 `;
 
-export default function Todo({ todo, onCheckBtnClick }) {
+export default function Pet({ pet, onCheckBtnClick }) {
   return (
     <ButtonStyled
-      iscompleted={todo.isCompleted ? '1' : ''}
+      iscompleted={pet.isCompleted ? '1' : ''}
       shouldFitContainer
       iconAfter={
-        <span className='check-icon' onClick={() => onCheckBtnClick(todo.id)}>
+        <span className='check-icon' onClick={() => onCheckBtnClick(pet.id)}>
           <CheckIcon primaryColor='#4fff4f' />
         </span>
       }
     >
-      {todo.name}
+      {pet.name}
     </ButtonStyled>
   );
 }
